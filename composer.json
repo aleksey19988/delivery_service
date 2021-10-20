@@ -1,0 +1,19 @@
+{
+    "name": "aleksey/food_delivery",
+    "autoload": {
+        "psr-4": {
+            "Aleksey\\FoodDelivery\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Aleksey Kononenko",
+            "email": "aleksey19988@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.5",
+        "twig/twig": "^3.0"
+    }
+}
