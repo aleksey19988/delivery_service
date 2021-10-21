@@ -17,7 +17,6 @@ class Orders
     {
         $statement = $this->connection->prepare('SELECT * FROM subscriptions_history ORDER BY order_creation_date DESC');
         $statement->execute();
-
         return $statement->fetchAll();
     }
 }

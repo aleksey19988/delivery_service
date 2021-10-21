@@ -3,7 +3,10 @@
     "autoload": {
         "psr-4": {
             "Aleksey\\FoodDelivery\\": "src/"
-        }
+        },
+        "files": [
+            "src/Orders.php"
+        ]
     },
     "authors": [
         {

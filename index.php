@@ -4,6 +4,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use Aleksey\DeliveryService\Orders;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -27,6 +28,7 @@ $app->setBasePath('/delivery_service');
 
 $app->get('/', function (Request $request, Response $response, $args) use ($view, $connection) {
     $orders = new Orders($connection);
+    $orders = $orders->get();
     $body = $view->render('index.twig', [
         'orders' => $orders,
     ]);

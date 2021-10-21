@@ -1,18 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="./">Blog</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="blog">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div class="container mt-2 mb-2">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Телефон</th>
+                <th scope="col">Дата создания заказа</th>
+                <th scope="col">Название рациона питания</th>
+                <th scope="col">Период доставки (с)</th>
+                <th scope="col">Период доставки (по)</th>
+                <th scope="col">Расписание доставки</th>
+                <th scope="col">Подробности</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <th scope="row"><a href="{{ order.id }}">{{ order.id }}</a></th>
+                    <td>{{ order.full_name }}</td>
+                    <td>{{ order.phone_number }}</td>
+                    <td>{{ order.order_creation_date }}</td>
+                    <td>{{ order.name_of_the_diet }}</td>
+                    <td>{{ order.start_of_delivery }}</td>
+                    <td>{{ order.end_of_delivery }}</td>
+                    <td>{{ order.delivery_schedule }}</td>
+                    <td><a href="{{ order.id }}">Подробнее</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
