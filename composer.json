@@ -5,7 +5,8 @@
             "Aleksey\\FoodDelivery\\": "src/"
         },
         "files": [
-            "src/Orders.php"
+            "src/Orders.php",
+            "src/Request.php"
         ]
     },
     "authors": [
