@@ -16,7 +16,7 @@
         <tbody>
             {% for order in orders %}
                 <tr>
-                    <th scope="row"><a href="{{ order.id }}">{{ order.id }}</a></th>
+                    <th scope="row"><a href="order/{{ order.id }}">{{ order.id }}</a></th>
                     <td>{{ order.full_name }}</td>
                     <td>{{ order.phone_num }}</td>
                     <td>{{ order.order_creation_date }}</td>
@@ -24,7 +24,7 @@
                     <td>{{ order.start_of_delivery }}</td>
                     <td>{{ order.end_of_delivery }}</td>
                     <td>{{ order.delivery_schedule }}</td>
-                    <td><a href="{{ order.id }}">Подробнее</a></td>
+                    <td><a href="order/{{ order.id }}">Подробнее</a></td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -24,6 +24,7 @@ try {
 }
 
 $app = AppFactory::create();
+
 $app->setBasePath('/delivery_service');
 $app->addErrorMiddleware(true, true, true);
 
@@ -37,7 +38,7 @@ $app->get('/', function (Request $request, Response $response, $args) use ($view
     return $response;
 });
 
-$app->post('/formRequest.php', function (Request $request, Response $response) {
+$app->post('/formRequest.php', function (Request $request, Response $response) use ($connection) {
     $orders = new Orders($connection);
     $orders = $orders->get();
     $body = $view->render('index.twig', [
@@ -47,17 +48,23 @@ $app->post('/formRequest.php', function (Request $request, Response $response) {
     return $response;
 });
 
-$app->get('/{order_id}', function (Request $request, Response $response, $args) use ($view, $connection) {
+$app->get('/success_order', function (Request $request, Response $response, $args) use ($view, $connection) {
+    $body = $view->render('success.twig');
+    $response->getBody()->write($body);
+    return $response;
+});
+
+$app->get('/order/{order_id}', function (Request $request, Response $response, $args) use ($view, $connection) {
     $orders = new Orders($connection);
     $order = $orders->getOneOrder($args['order_id']);
 
-    if (empty($post)) {
-        $body = $view->render('not-found.twig');
-    } else {
+    // if (empty($order)) {
+    //     $body = $view->render('not-found.twig');
+    // } else {
         $body = $view->render('order.twig', [
-            'post' => $post,
+            'order' => $order,
         ]);
-    }
+    // }
     $response->getBody()->write($body);
     return $response;
 });

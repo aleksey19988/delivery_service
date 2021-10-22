@@ -1,0 +1,45 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+{% set daysDictionary= {
+    'monday': 'Понедельник',
+    'tuesday': 'Вторник',
+    'wednesday': 'Среда',
+    'thursday': 'Четверг',
+    'friday': 'Пятница',
+    'saturday': 'Суббота',
+    'sunday': 'Воскресенье'} %} {# Создаю словарь, чтобы потом перебрать дни недели и преобразовать их названия в кириллицу #}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ФИО</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Дата создания заказа</th>
+            <th scope="col">Название рациона питания</th>
+            <th scope="col">Период доставки (с)</th>
+            <th scope="col">Период доставки (по)</th>
+            <th scope="col">Расписание доставки</th>
+            <th scope="col">Выбранные дни недели питания</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for parameter in order %}
+            <tr>
+                <th scope="row">{{ parameter.id }}</th>
+                <td>{{ parameter.full_name }}</td>
+                <td>{{ parameter.phone_num }}</td>
+                <td>{{ parameter.order_creation_date }}</td>
+                <td>{{ parameter.name_of_the_diet }}</td>
+                <td>{{ parameter.start_of_delivery }}</td>
+                <td>{{ parameter.end_of_delivery }}</td>
+                <td>{{ parameter.delivery_schedule }}</td>
+                <td>{{ parameter.selected_days }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>
+    Дни недели питания:
+</p>
+{% endblock %}

@@ -39,6 +39,25 @@ $saturday = $_POST['saturday'] ?? 'off';
 $sunday = $_POST['sunday'] ?? 'off';
 $comment = $_POST['comment'];
 
+$selectedDays = [];
+
+$days = [
+    'monday' => $monday, 
+    'tuesday' => $tuesday,
+    'wednesday' => $wednesday,
+    'thursday' => $thursday,
+    'friday' => $friday,
+    'saturday' => $saturday,
+    'sunday' => $sunday
+];
+foreach($days as $day => $value) {
+    $value === 'on' ? array_push($selectedDays, $day) : $value;
+}
+
+$selectedDays = implode(', ', $selectedDays);
+
+print_r("Выбранные дни: $selectedDays");
+
 $result = $connection->query("INSERT INTO `subscriptions_history` (
     full_name,
     phone_num,
@@ -47,13 +66,7 @@ $result = $connection->query("INSERT INTO `subscriptions_history` (
     start_of_delivery,
     end_of_delivery,
     delivery_schedule,
-    monday,
-    tuesday,
-    wednesday,
-    thursday,
-    friday,
-    saturday,
-    sunday,
+    selected_days,
     comment) VALUES (
         '$name',
         '$phone',
@@ -62,23 +75,16 @@ $result = $connection->query("INSERT INTO `subscriptions_history` (
         '$deliveryStartDate',
         '$deliveryEndDate',
         '$deliverySchedule',
-        '$monday',
-        '$tuesday',
-        '$wednesday',
-        '$thursday',
-        '$friday',
-        '$saturday',
-        '$sunday',
+        '$selectedDays',
         '$comment')");
 
 if ($result) {
-    // echo json_encode(array('result' => 'success'));
-    echo "Успешно! Через 3 секунды вы будете перенаправлены на главную страницу";
+    echo json_encode(array('result' => 'success'));
+    header("Refresh:0; url=success_order");
+    exit();
 } else {
     echo json_encode(array(
         'result' => 'failed',
         'error' => mysqli_error($connection)
     ));
 }
-
-header("Refresh:0; url=/delivery_service");

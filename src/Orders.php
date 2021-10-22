@@ -22,7 +22,7 @@ class Orders
 
     public function getOneOrder($order_id)
     {
-        $statement = $this->connection->prepare('SELECT * FROM subscriptions_history WHERE id = :order_id');
+        $statement = $this->connection->prepare("SELECT * FROM subscriptions_history WHERE id = '$order_id'");
         $statement->execute();
         return $statement->fetchAll();
     }
