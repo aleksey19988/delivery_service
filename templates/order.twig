@@ -1,7 +1,7 @@
 {% extends 'base.twig' %}
 
 {% block body %}
-{% set daysDictionary= {
+{% set daysDictionary = {
     'monday': 'Понедельник',
     'tuesday': 'Вторник',
     'wednesday': 'Среда',
@@ -26,7 +26,7 @@
     <tbody>
         {% for parameter in order %}
             <tr>
-                <th scope="row">{{ parameter.id }}</th>
+                <th>{{ parameter.id }}</th>
                 <td>{{ parameter.full_name }}</td>
                 <td>{{ parameter.phone_num }}</td>
                 <td>{{ parameter.order_creation_date }}</td>
@@ -34,12 +34,20 @@
                 <td>{{ parameter.start_of_delivery }}</td>
                 <td>{{ parameter.end_of_delivery }}</td>
                 <td>{{ parameter.delivery_schedule }}</td>
-                <td>{{ parameter.selected_days }}</td>
+                {% set selectedDays = parameter.selected_days|split(', ') %}
+                <td>
+                    <ul>
+                        {% for dayInEnglish, dayInRussian in daysDictionary %}
+                            {% for selectedDay in selectedDays %}
+                                {% if selectedDay == dayInEnglish %}
+                                    <li>{{ dayInRussian }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
-<p>
-    Дни недели питания:
-</p>
 {% endblock %}
